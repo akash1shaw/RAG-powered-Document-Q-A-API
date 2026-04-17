@@ -4,14 +4,12 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
 from dotenv import load_dotenv
-
 load_dotenv()
 
 # Create the database engine using your DATABASE_URL from .env
 engine = create_engine(os.getenv("DATABASE_URL"))
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
-
 
 class Document(Base):
     """
@@ -20,19 +18,16 @@ class Document(Base):
     We store the text chunks so we can return them to the user.
     """
     __tablename__ = "documents"
-
     id = Column(Integer, primary_key=True, index=True)
     filename = Column(String, nullable=False)         # original PDF name
     chunk_index = Column(Integer, nullable=False)     # which chunk (0, 1, 2...)
     chunk_text = Column(Text, nullable=False)         # the actual text
     faiss_index = Column(Integer, nullable=False)     # position in FAISS index
     created_at = Column(DateTime, default=datetime.utcnow)
-
-
+    
 class QueryHistory(Base):
     """
     Stores every question asked + the answer given.
-    Great to show in your resume — demonstrates SQL schema design.
     """
     __tablename__ = "query_history"
 
