@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-multipart
+pypdf
+faiss-cpu
+openai
+sqlalchemy
+psycopg2-binary
+python-dotenv
+numpy
+pydantic
